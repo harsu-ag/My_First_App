@@ -1,34 +1,39 @@
 package developer.harsu.com.myfirstapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private int sum;
-    TextView tvSum;
 
+
+
+    EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sum = 0;
-        Button bAdd, bSub;
+        Button start;
+        start=(Button) findViewById(R.id.BStartNew);
+        editText=(EditText) findViewById(R.id.editText);
+        start.setOnClickListener(this);
 
-        bAdd = (Button) findViewById(R.id.Badd);
-        bSub = (Button) findViewById(R.id.Bsub);
-        tvSum = (TextView) findViewById(R.id.tvSum);
+    }
 
-        bAdd.setOnClickListener(this);
-        bSub.setOnClickListener(this);
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("Main Activity" , "OnResume called");
     }
 
     @Override
@@ -54,18 +59,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("Main Activity", "onPause called");
+    }
+
+    @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.Badd) {
-            Toast.makeText(this, "BAdd clicked", Toast.LENGTH_SHORT).show();
-
-            sum++;
-            tvSum.setText("Sum is " + sum);
-
-
-        } else if (v.getId() == R.id.Bsub) {
-            Toast.makeText(this, "BSub clicked", Toast.LENGTH_SHORT).show();
-            sum--;
-            tvSum.setText("Sum is " + sum);
-        }
+       if(v.getId()==R.id.BStartNew){
+          String entered= editText.getText().toString();
+           Intent intent=new Intent(this,SubActivity.class);
+           intent.putExtra("abcd",entered);
+           startActivity(intent);
+       }
     }
 }
