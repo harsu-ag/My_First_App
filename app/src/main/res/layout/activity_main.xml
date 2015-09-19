@@ -14,11 +14,16 @@
         android:layout_height="wrap_content"
         android:hint="Type here"
         android:id="@+id/editText"
+        android:inputType="textEmailAddress"
         />
     <Button
         android:id="@+id/BStartNew"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="start activity"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_plus"/>
 
 </LinearLayout>

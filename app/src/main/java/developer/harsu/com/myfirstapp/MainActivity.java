@@ -26,7 +26,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button start;
         start=(Button) findViewById(R.id.BStartNew);
         editText=(EditText) findViewById(R.id.editText);
-        start.setOnClickListener(this);
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String entered= editText.getText().toString();
+                Intent intent=new Intent(MainActivity.this,SubActivity.class);
+                intent.putExtra("abcd",entered);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
