@@ -1,19 +1,52 @@
 package developer.harsu.com.myfirstapp;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+
 
 public class SubActivity extends AppCompatActivity {
 
+    int camera=0;
+    ImageView cameraImage;
+    Button clickImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub);
+        setContentView(R.layout.camera_layout);
+
+        clickImage=(Button) findViewById(R.id.clickImage);
+        cameraImage=(ImageView) findViewById(R.id.cameraImage);
+
+        clickImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(i,camera);
+            }
+        });
+
 
         setTitle(getIntent().getStringExtra("abcd"));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==camera){
+            if(resultCode==RESULT_OK){
+                Bundle extras=data.getExtras();
+                Bitmap bmp=(Bitmap) extras.get("data");
+                cameraImage.setImageBitmap(bmp);
+            }
+        }
     }
 
     @Override

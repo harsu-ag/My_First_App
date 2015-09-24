@@ -63,10 +63,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Abcd" />
+
 
             <Button
                 android:layout_width="wrap_content"
